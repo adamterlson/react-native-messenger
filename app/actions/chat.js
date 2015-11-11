@@ -1,4 +1,4 @@
-let server = 'http://localhost:3000';
+let server = 'http://192.168.1.35:3000';
 let RECEIEVE_MESSAGES = 'RECEIEVE_MESSAGES';
 let CREATE_MESSAGE = 'CREATE_MESSAGE';
 
