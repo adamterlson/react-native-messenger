@@ -11,14 +11,14 @@ let { styles } = require('./app/styles');
 let configureStore = require('./app/store/configureStore');
 let store = configureStore();
 
-var messenger = React.createClass({
-  render: function() {
+class messenger extends React.Component{
+  render() {
     return (
       <Provider store={store}>
         {() => <Chat />}
       </Provider>
     );
   }
-});
+}
 
 AppRegistry.registerComponent('messenger', () => messenger);
