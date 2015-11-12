@@ -17,7 +17,7 @@ class AuthorEntry extends React.Component {
   render() {
     return (
       <View>
-        <Text>What's your name?</Text>
+        <Text>What is your name?</Text>
         <TextInput
           style={styles.textInput}
           onChangeText={(text) => this.setState({ text })}
