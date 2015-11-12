@@ -23,7 +23,7 @@ class AuthorEntry extends React.Component {
           onChangeText={(text) => this.setState({ text })}
           />
         <TouchableHighlight
-          onPress={() => this.props.onSubmit(this.state.text || 'bob')}
+          onPress={() => this.props.onSubmit(this.state.text)}
           underlayColor={colors.primaryHighlight}
           style={styles.button}>
           <Text style={styles.buttonLabel}>Let's go!</Text>

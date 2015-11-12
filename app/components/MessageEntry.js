@@ -17,7 +17,7 @@ class AuthorEntry extends React.Component {
   }
 
   _onPress() {
-    this.props.onSubmit(this.state.text || 'asdf');
+    this.props.onSubmit(this.state.text);
     this.setState({ text: '' });
   }
 
