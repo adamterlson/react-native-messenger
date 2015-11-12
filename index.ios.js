@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react-native');
-var {
+let React = require('react-native');
+let {
   AppRegistry,View
 } = React;
 let Chat = require('./app/containers/Chat');
