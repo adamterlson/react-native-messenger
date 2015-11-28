@@ -1,4 +1,5 @@
-let { combineReducers } = require('redux');
-let chat = require('./chat');
+import { combineReducers } from 'redux'
+import chat from './chat'
+import user from './user'
 
-module.exports = combineReducers({ chat });
+export default combineReducers({ chat, user });

@@ -1,57 +1,25 @@
-let server = 'http://10.100.133.128:3000';
-let RECEIEVE_MESSAGES = 'RECEIEVE_MESSAGES';
-let CREATE_MESSAGE = 'CREATE_MESSAGE';
+import socket from '../socket';
 
-function receiveMessages(messages) {
-  return {
-    type: RECEIEVE_MESSAGES,
-    messages
-  };
-}
+export const CREATE_MESSAGE = 'CREATE_MESSAGE';
 
-function createMessage(author, text) {
-  return (dispatch) => {
-    POST({ author, text }).then(() => {
-      dispatch({
-        type: CREATE_MESSAGE,
-        message: {
-          author,
-          text
-        }
-      });
-    });
-  };
-}
-
-function getMessages() {
-  return (dispatch) => {
-    setInterval(() => {
-      GET()
-        .then((messages) => {
-          dispatch(receiveMessages(messages));
-        });
-    }, 1000);
-  };
-}
-
-function GET() {
-  return fetch(server)
-    .then((resp) => resp.json());
-}
-
-function POST(data) {
-  return fetch(server, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json'
+export function createMessage(author, text) {
+  return socket.action({
+    type: CREATE_MESSAGE,
+    message: {
+      author,
+      text
     }
   });
+};
+
+export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
+
+export function receiveMessage(message) {
+  console.log('receiving message', message);
+  return {
+    type: RECEIVE_MESSAGE,
+    message
+  };
 }
 
-module.exports = {
-  RECEIEVE_MESSAGES,
-  CREATE_MESSAGE,
-  getMessages,
-  createMessage
-};
+socket.on(RECEIVE_MESSAGE, receiveMessage);

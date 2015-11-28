@@ -1,17 +1,18 @@
-'use strict';
+import React, {
+  AppRegistry,
+  View
+} from 'react-native';
 
-let React = require('react-native');
-let {
-  AppRegistry,View
-} = React;
-let Chat = require('./app/containers/Chat');
-let { Provider } = require('react-redux/native');
-let { styles } = require('./app/styles');
-
-let configureStore = require('./app/store/configureStore');
-let store = configureStore();
+import { Provider } from 'react-redux/native';
+import Chat from './app/containers/Chat';
+import style from './app/styles';
+import store from './app/store';
 
 class messenger extends React.Component{
+  constructor() {
+    super();
+  }
+
   render() {
     return (
       <Provider store={store}>

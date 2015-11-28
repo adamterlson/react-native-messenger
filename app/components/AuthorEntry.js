@@ -5,7 +5,7 @@ let {
   TextInput,
   TouchableHighlight
 } = React;
-let { styles, colors } = require('../styles');
+let { style, colors } = require('../styles');
 
 class AuthorEntry extends React.Component {
   constructor(props) {
@@ -19,14 +19,14 @@ class AuthorEntry extends React.Component {
       <View>
         <Text>What is your name?</Text>
         <TextInput
-          style={styles.textInput}
+          style={[...style('textInput').style, { color: 'red' }]}
           onChangeText={(text) => this.setState({ text })}
           />
         <TouchableHighlight
           onPress={() => this.props.onSubmit(this.state.text)}
           underlayColor={colors.primaryHighlight}
-          style={styles.button}>
-          <Text style={styles.buttonLabel}>Let's go!</Text>
+          {...style('button')}>
+          <Text {...style('buttonLabel')}>Let's go!</Text>
         </TouchableHighlight>
       </View>
     );

@@ -1,13 +1,13 @@
-let React = require('react-native');
-let {
+import React, {
   View,
   Text
-} = React;
-let { bindActionCreators } = require('redux');
-let { connect } = require('react-redux/native');
-let { styles } = require('../styles');
+} from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux/native';
+import { style } from '../styles';
 
-let ChatActions = require('../actions/chat');
+const ChatActions = require('../actions/chat');
+const UserActions = require('../actions/user');
 
 let Log = require('../components/Log');
 let AuthorEntry = require('../components/AuthorEntry');
@@ -16,36 +16,28 @@ let MessageEntry = require('../components/MessageEntry');
 class Chat extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      author: null
-    };
   }
 
-  componentWillMount() {
-    this.props.getMessages();
-  }
-
-  _onAuthorSubmit(author) {
-    this.setState({ author });
+  _onAuthorSubmit(name) {
+    this.props.userActions.createUser({name});
   }
 
   _onMessageSubmit(text) {
-    if (!this.state.author || !text) return;
+    if (!this.props.author || !text) return;
   
-    this.props.createMessage(this.state.author, text);
+    this.props.chatActions.createMessage(this.props.author, text);
   }
 
   render() {
     let screen;
 
-    if (!this.state.author) {
+    if (!this.props.author.name) {
       screen = (<AuthorEntry onSubmit={(author) => this._onAuthorSubmit(author)}/>);
     } else {
       screen = (
         <View style={{flex:1}}>
-          <View style={styles.authorName}>
-            <Text style={styles.authorNameText}>{this.state.author}</Text>
+          <View {...style('authorName')}>
+            <Text {...style('authorNameText')}>{this.props.author}</Text>
           </View>
           <Log messages={this.props.messages} />
           <MessageEntry onSubmit={(message) => this._onMessageSubmit(message)} />
@@ -54,7 +46,7 @@ class Chat extends React.Component {
     }
 
     return (
-      <View style={styles.page}>
+      <View {...style('page')}>
         {screen}
       </View>
     );
@@ -63,12 +55,16 @@ class Chat extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    messages: state.chat
+    messages: state.chat,
+    author: state.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ChatActions, dispatch);
+  return {
+    chatActions: bindActionCreators(ChatActions, dispatch),
+    userActions: bindActionCreators(UserActions, dispatch)
+  };
 }
 
 module.exports = connect(

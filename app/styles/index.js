@@ -1,18 +1,19 @@
-let { StyleSheet} = require('react-native');
+const cairn = require('cairn');
+const { StyleSheet} = require('react-native');
 
-let spaces = {
+const spaces = {
   gutter: 10,
   statusBarHeight: 30
 };
 
-let colors = {
+export const colors = {
   primary: '#DA4745',
   primaryHighlight: 'gray',
   light: 'gray',
   white: 'white'
 };
 
-let u = {
+const u = {
   centerX: {
     alignItems: 'center',
   },
@@ -30,7 +31,6 @@ let u = {
     marginBottom: spaces.gutter,
   }
 };
-
 let text = {
   L: {
     fontSize: 20,
@@ -46,7 +46,7 @@ let text = {
   }
 };
 
-let styles = StyleSheet.create({
+export const style = cairn.style(StyleSheet.create(cairn.pile({
   page: {
     marginTop: spaces.statusBarHeight,
     margin: spaces.gutter,
@@ -89,9 +89,4 @@ let styles = StyleSheet.create({
     flex: 1,
     ...u.spacedBorderBottom
   },
-});
-
-module.exports = {
-  styles,
-  colors
-};
+})));

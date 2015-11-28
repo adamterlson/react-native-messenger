@@ -4,7 +4,7 @@ let {
   Text,
   ScrollView,
 } = React;
-let { styles } = require('../styles');
+let { style } = require('../styles');
 
 class Log extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class Log extends React.Component {
     return (
       <ScrollView 
         automaticallyAdjustContentInsets={false}
-        style={styles.log}
+        {...style('log')}
         scrollEventThrottle={200}>
         <View>
           {this.props.messages.map(this._renderMessage)}
@@ -30,7 +30,7 @@ class Log extends React.Component {
 
   _renderEmptyMessage() {
     return (
-      <View style={styles.log}>
+      <View {...style('log')}>
         <Text>There are currently no messages.</Text>
       </View>
     );

@@ -1,9 +1,9 @@
-let { createStore, applyMiddleware } = require('redux');
-let thunk = require('redux-thunk');
-let reducer = require('../reducers');
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducer from '../reducers';
 
-let createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
-module.exports = function configureStore(initialState) {
+export default function configureStore(initialState) {
   return createStoreWithMiddleware(reducer, initialState);
 };
