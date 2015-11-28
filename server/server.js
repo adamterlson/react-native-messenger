@@ -3,11 +3,9 @@ var bodyParser = require('body-parser');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8080;
 
-server.listen(port, function () {
-  console.log('Server listening at port %d', port);
-});
+server.listen(port, "0.0.0.0");
 
 var messages = [];
 
@@ -25,6 +23,7 @@ router.post('/', function (req, res) {
 
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
+  console.log('req');
   next();
 });
 app.use(router);
@@ -36,6 +35,7 @@ var usernames = {};
 var numUsers = 0;
 
 io.on('connection', function (socket) {
+  console.log('connected!');
   var addedUser = false;
 
   // when the client emits 'new message', this listens and executes
