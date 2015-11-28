@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 
 server.listen(port, "0.0.0.0");
 

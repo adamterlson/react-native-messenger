@@ -4,7 +4,8 @@ import store from './store';
 window.navigator.userAgent = 'react-native';
 let io = require('socket.io-client/socket.io');
 
-const socket = io('192.168.1.103:3000');
+// Only works with chrome debugger enabled
+const socket = io('localhost:3000', { jsonp: false });
 
 socket.connect();
 
