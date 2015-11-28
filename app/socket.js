@@ -4,7 +4,7 @@ import store from './store';
 window.navigator.userAgent = 'react-native';
 import io from 'socket.io-client/socket.io';
 
-const socket = io('localhost:3000', { jsonp: false });
+const socket = io('192.168.2.35:3000', { jsonp: false });
 
 socket.connect();
 
